@@ -3,7 +3,7 @@
 from datetime import datetime
 from typing import Any
 
-from sqlalchemy import DateTime, Float, Integer, String
+from sqlalchemy import JSON, DateTime, Float, Integer, String
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column
 
@@ -39,12 +39,13 @@ class Event(Base):
     service_id: Mapped[int] = mapped_column(Integer, nullable=False)
     source: Mapped[str] = mapped_column(String(100), nullable=False)
     severity: Mapped[str] = mapped_column(String(50), nullable=False)
-    raw: Mapped[dict[str, Any]] = mapped_column(JSONB, nullable=False)
+    raw: Mapped[dict[str, Any]] = mapped_column(JSON().with_variant(JSONB, "postgresql"), nullable=False)
     template_id: Mapped[str | None] = mapped_column(String(255))
     signature: Mapped[str | None] = mapped_column(String(255))
     trace_id: Mapped[str | None] = mapped_column(String(255))
     span_id: Mapped[str | None] = mapped_column(String(255))
     ingest_ts: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=False)
+    event_key: Mapped[str] = mapped_column(String(64), unique=True, nullable=False)
 
 
 class Metric(Base):

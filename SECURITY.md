@@ -71,8 +71,8 @@ inspection, or an automated scan. Use `FAIL`, `PARTIAL`, `NOT APPLICABLE`, or
 
 ## 12. RootWise-specific security
 
-- [ ] Status: `NOT APPLICABLE` — LLM investigation and remediation APIs are not implemented.
-- [ ] Status: `NOT VERIFIED` — Future ingestion must isolate untrusted logs from instructions and cite evidence IDs for every claim.
+- [ ] Status: `PARTIAL` — Structured ingestion validates and bounds log input, stores provenance, never executes log content, and is not registered in production; authentication and authorization are still required before exposure beyond trusted local development.
+- [ ] Status: `PASS` — Ingestion treats log text as data and does not interpret it as instructions or commands.
 - [ ] Status: `NOT VERIFIED` — Incident history, replay, simulation authorization, audit logging, dry-run remediation, and provider-key protection require implementation and tests.
 
 ## Required review evidence

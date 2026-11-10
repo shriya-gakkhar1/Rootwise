@@ -20,3 +20,4 @@ def test_initial_migration_applies_to_clean_database() -> None:
     assert set(inspect(engine).get_table_names()) >= {
         "services", "dependencies", "events", "metrics", "incidents", "audit_log"
     }
+    assert "event_key" in {column["name"] for column in inspect(engine).get_columns("events")}

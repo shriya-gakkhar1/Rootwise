@@ -74,3 +74,11 @@ feature does not exist; they are release blockers for future feature surfaces.
 - Existing health and migration test structure reviewed.
 - No production service, external target, or destructive database operation was tested.
 - Secret values are intentionally omitted from this report.
+
+## Ingestion milestone security note
+
+The local-development ingestion API validates bounded structured records, normalizes
+timestamps and severity, preserves validated provenance, and uses deterministic event
+identity for replay protection. The routes are not registered when `ENV=production`.
+Authentication, authorization, rate limiting, and production exposure controls remain
+required before ingestion can accept data outside a trusted local development boundary.
