@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rootwise-backend"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+  "alembic>=1.13,<2",
+  "fastapi>=0.110,<1",
+  "psycopg[binary]>=3.1,<4",
+  "pydantic>=2.6,<3",
+  "pydantic-settings>=2.2,<3",
+  "sqlalchemy>=2.0,<3",
+  "uvicorn[standard]>=0.29,<1",
+]
+
+[project.optional-dependencies]
+dev = ["httpx>=0.27,<1", "pytest>=8,<9", "ruff>=0.4,<1"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]

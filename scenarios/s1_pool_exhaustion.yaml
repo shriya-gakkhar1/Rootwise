@@ -1,0 +1,19 @@
+scenario_id: s1_pool_exhaustion
+seed: 42
+duration_seconds: 300
+start_epoch: "2026-01-01T00:00:00+00:00"
+fault_injection:
+  node: postgres
+  description: Exhaust the shared PostgreSQL connection pool.
+  leak_rate_connections_per_second: 0.8
+  pool_size: 100
+  utilisation_threshold: 0.8
+  acquire_timeout_ms: 500
+decoy_deploy:
+  service: customer-api
+  description: Deploy a harmless customer-api version shortly after onset.
+ground_truth:
+  cause_node: postgres
+  mechanism: connection_pool_exhaustion
+  true_onset_seconds: 90
+  truly_affected_services: [customer-api, order-service, api-gateway, frontend]

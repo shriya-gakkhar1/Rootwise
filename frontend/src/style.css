@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color: #d7e0ea; background: #080d14; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; }
+.shell { display: flex; min-height: 100vh; background: radial-gradient(circle at 70% 20%, #132337, #080d14 50%); }
+aside { width: 240px; border-right: 1px solid #1d2b3a; padding: 28px 20px; background: #0b121c; }
+.brand { color: #70e1c4; font-weight: 800; letter-spacing: .2em; }
+nav { display: grid; gap: 12px; margin-top: 48px; color: #718397; }
+nav span { padding: 12px; border-radius: 6px; }
+nav .active { color: #e8f1f8; background: #162536; }
+.workspace { flex: 1; display: flex; flex-direction: column; }
+header, footer { padding: 20px 32px; border-bottom: 1px solid #1d2b3a; color: #a7b8c8; }
+header { display: flex; justify-content: space-between; }
+.environment { color: #70e1c4; font-size: .75rem; letter-spacing: .12em; }
+.content { flex: 1; padding: 32px; }
+h1 { color: #eef5fb; font-size: 1.8rem; font-weight: 500; }
+.content p { color: #718397; }
+footer { border-top: 1px solid #1d2b3a; border-bottom: 0; font-size: .85rem; }
+.dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: #e37d7d; margin-right: 8px; }
+.dot.online { background: #70e1c4; }

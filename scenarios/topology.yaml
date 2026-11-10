@@ -1,0 +1,53 @@
+services:
+  - name: frontend
+    kind: application
+  - name: api-gateway
+    kind: application
+  - name: auth-service
+    kind: application
+  - name: customer-api
+    kind: application
+  - name: order-service
+    kind: application
+  - name: payment-service
+    kind: external
+  - name: postgres
+    kind: database
+  - name: queue
+    kind: queue
+depends_on:
+  - from_service: frontend
+    to_service: api-gateway
+    fan_out_factor: 1.0
+    propagation_delay_seconds: 5
+  - from_service: api-gateway
+    to_service: auth-service
+    fan_out_factor: 0.45
+    propagation_delay_seconds: 5
+  - from_service: api-gateway
+    to_service: customer-api
+    fan_out_factor: 0.3
+    propagation_delay_seconds: 7
+  - from_service: api-gateway
+    to_service: order-service
+    fan_out_factor: 0.25
+    propagation_delay_seconds: 9
+  - from_service: customer-api
+    to_service: postgres
+    fan_out_factor: 1.0
+    propagation_delay_seconds: 5
+  - from_service: order-service
+    to_service: postgres
+    fan_out_factor: 1.0
+    propagation_delay_seconds: 5
+  - from_service: order-service
+    to_service: payment-service
+    fan_out_factor: 0.25
+    propagation_delay_seconds: 4
+  - from_service: order-service
+    to_service: queue
+    fan_out_factor: 0.2
+    propagation_delay_seconds: 4
+shares_resource:
+  - services: [customer-api, order-service]
+    resource: postgres-connection-pool
